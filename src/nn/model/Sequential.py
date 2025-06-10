@@ -77,7 +77,6 @@ class Sequential():
  
  
     def fit(self, x_train, y_train, epochs=1, learning_rate=0.001, batch_size=32):
-        """Train the model with batch processing and progress tracking"""
         if not self.compiled:
             raise ValueError("Model must be compiled before training")
  
@@ -88,12 +87,10 @@ class Sequential():
             epoch_loss = 0
             epoch_accuracy = 0
  
-            # Shuffle data
             indices = np.random.permutation(n_samples)
             x_shuffled = x_train[indices]
             y_shuffled = y_train[indices]
  
-            # Progress tracking
             print(f"Epoch {epoch + 1}/{epochs}")
  
             for batch_idx in range(n_batches):
@@ -129,7 +126,7 @@ class Sequential():
             final_accuracy = epoch_accuracy / n_batches
             print(f"\r{n_batches}/{n_batches} {'━' * 20} 100% - "
                   f"accuracy: {final_accuracy:.4f} - loss: {final_loss:.4f}")
-            print()  # New line after each epoch
+            print()  
     def save(self,filepath):
         model_data = {
             'layers':self.layers,
